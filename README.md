@@ -1,7 +1,22 @@
-# Moqui Example
+## Moqui Example
 
-Example Component with entities, data in various formats, services, REST API, screens, compiled code, and tests
+[![license](http://img.shields.io/badge/license-CC0%201.0%20Universal-blue.svg)](https://github.com/moqui/example/blob/master/LICENSE.md)
+[![release](http://img.shields.io/github/release/moqui/example.svg)](https://github.com/moqui/example/releases)
+[![commits since release](http://img.shields.io/github/commits-since/moqui/example/v1.6.2.svg)](https://github.com/moqui/example/commits/master)
+[![downloads](http://img.shields.io/github/downloads/moqui/example/total.svg)](https://github.com/moqui/example/releases)
 
-To install run:
+Example Component with: 
 
-    $ gradle getComponent -Pcomponent=example
+- entities
+- data in various formats
+- services
+- REST API
+- screens
+- tenant
+- system message produce and consume
+- compiled code
+- tests
+
+To install run (with moqui-framework):
+
+    $ ./gradlew getComponent -Pcomponent=example
