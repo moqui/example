@@ -15,18 +15,7 @@ along with this software (see the LICENSE.md file). If not, see
 <entity-facade-xml type="demo">
     <!-- NOTE 1265184000000 = 2010-02-03 00:00:00 US/Pacific -->
 
-    <!-- ========== Example/Test User ========== -->
-    <!-- password=moqui -->
-    <moqui.security.UserAccount userId="EX_JOHN_DOE" username="john.doe" userFullName="John Doe"
-            currentPassword="16ac58bbfa332c1c55bd98b53e60720bfa90d394" passwordHashType="SHA"
-            passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" timeZone="US/Central"
-            emailAddress="john.doe@test.com"/>
-    <moqui.security.UserGroupMember userGroupId="ADMIN" userId="EX_JOHN_DOE" fromDate="1265184000000"/>
-    <moqui.security.UserPermission userPermissionId="ExamplePerm" description="Example Permission"/>
-    <moqui.security.UserGroupPermission userGroupId="ADMIN" userPermissionId="ExamplePerm"
-            fromDate="1265184000000" thruDate=""/>
-    <moqui.security.UserLoginHistory userId="EX_JOHN_DOE" fromDate="1265184000000" successfulLogin="Y"/>
-
+    <!-- Example Entity and Service Authz -->
     <!-- services matched by fully qualified name, so can just use path/package prefix -->
     <moqui.security.ArtifactGroupMember artifactGroupId="EXAMPLE_APP" artifactName="moqui\.example\..*"
             nameIsPattern="Y" artifactTypeEnumId="AT_SERVICE" inheritAuthz="Y"/>
@@ -55,14 +44,6 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.security.UserGroupMember userGroupId="EXAMPLE_LTD" userId="EX_TLD" fromDate="1265184000000"/>
     <moqui.security.ArtifactAuthz artifactAuthzId="EXAMPLE_AUTHZ_LTD" userGroupId="EXAMPLE_LTD"
             artifactGroupId="EXAMPLE_LTD" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
-
-    <!-- ========== Artifact Tarpit Example ========== -->
-    <moqui.security.ArtifactGroup artifactGroupId="ALL_SCREENS" description="All Screens"/>
-    <moqui.security.ArtifactGroupMember artifactGroupId="ALL_SCREENS" artifactName=".*" nameIsPattern="Y"
-            artifactTypeEnumId="AT_XML_SCREEN"/>
-    <!-- if more than 120 screens in 60 seconds, deny access for 60 seconds -->
-    <moqui.security.ArtifactTarpit userGroupId="ALL_USERS" artifactGroupId="ALL_SCREENS"
-            maxHitsCount="120" maxHitsDuration="60" tarpitDuration="60"/>
 
     <!-- ========== Tenant Example ========== -->
     <!-- To load data into this tenant use something like: "gradle load -PtenantId=EXAMPLE1" -->
