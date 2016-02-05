@@ -18,7 +18,7 @@ along with this software (see the LICENSE.md file). If not, see
 <resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/rest-api-1.6.xsd"
         name="example" displayName="Example REST API" version="1.6.2">
     <resource name="examples">
-        <method type="get"><entity name="examples" masterName="default" operation="list"/></method>
+        <method type="get"><entity name="examples" operation="list"/></method>
         <method type="post"><service name="moqui.example.ExampleServices.create#Example"/></method>
 
         <id name="exampleId">
@@ -33,6 +33,46 @@ along with this software (see the LICENSE.md file). If not, see
                     <method type="patch"><entity name="exampleItems" operation="update"/></method>
                     <method type="put"><entity name="exampleItems" operation="store"/></method>
                     <method type="delete"><entity name="exampleItems" operation="delete"/></method>
+                </id>
+            </resource>
+            <resource name="featureAppls">
+                <method type="get"><entity name="moqui.example.ExampleFeatureAppl" operation="list"/></method>
+
+                <id name="exampleFeatureId">
+                    <method type="get"><entity name="moqui.example.ExampleFeatureAppl" operation="list"/></method>
+                    <method type="post"><service name="moqui.example.ExampleServices.create#ExampleFeatureAppl"/></method>
+
+                    <id name="fromDate">
+                        <method type="get"><entity name="moqui.example.ExampleFeatureAppl" operation="one"/></method>
+                        <method type="patch"><entity name="moqui.example.ExampleFeatureAppl" operation="update"/></method>
+                        <method type="put"><entity name="moqui.example.ExampleFeatureAppl" operation="store"/></method>
+                        <method type="delete"><entity name="moqui.example.ExampleFeatureAppl" operation="delete"/></method>
+                    </id>
+                </id>
+            </resource>
+        </id>
+    </resource>
+    <resource name="exampleFeatures">
+        <method type="get"><entity name="exampleFeatures" operation="list"/></method>
+        <method type="post"><service name="moqui.example.ExampleServices.create#ExampleFeature"/></method>
+
+        <id name="exampleFeatureId">
+            <method type="get"><entity name="exampleFeatures" operation="one"/></method>
+            <method type="patch"><entity name="exampleFeatures" operation="update"/></method>
+
+            <resource name="featureAppls">
+                <method type="get"><entity name="moqui.example.ExampleFeatureAppl" operation="list"/></method>
+
+                <id name="exampleId">
+                    <method type="get"><entity name="moqui.example.ExampleFeatureAppl" operation="list"/></method>
+                    <method type="post"><service name="moqui.example.ExampleServices.create#ExampleFeatureAppl"/></method>
+
+                    <id name="fromDate">
+                        <method type="get"><entity name="moqui.example.ExampleFeatureAppl" operation="one"/></method>
+                        <method type="patch"><entity name="moqui.example.ExampleFeatureAppl" operation="update"/></method>
+                        <method type="put"><entity name="moqui.example.ExampleFeatureAppl" operation="store"/></method>
+                        <method type="delete"><entity name="moqui.example.ExampleFeatureAppl" operation="delete"/></method>
+                    </id>
                 </id>
             </resource>
         </id>
