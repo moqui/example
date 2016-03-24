@@ -1,7 +1,4 @@
 
-NOTE: the toc is not yet implemented in Markdown4J (it's on the roadmap).
-{{ toc }}
-
 # Example Markdown Page
 
 This is an example wiki page using the Markdown style of wiki markup (hence the extension md or markdown).
@@ -9,7 +6,7 @@ This is an example wiki page using the Markdown style of wiki markup (hence the 
 References for the syntax are available on these pages:
 
 [John Gruber Markdown Syntax](http://daringfireball.net/projects/markdown/syntax)
-[Markdown4J Project](https://code.google.com/p/markdown4j/)
+[PegDown Project](https://github.com/sirthias/pegdown)
 
 If you are reading this in your browser you are probably viewing this in an HTML form which was created by transforming
 the Markdown text to HTML using the Markdown4J library.
@@ -33,4 +30,4 @@ This is the text under Sub-Heading 2.
 
 This content is also dynamic and the normal context is available here.
 
-For example, here is your userId: ${ec.user.userId?default('(No User Logged In)')}
+For example, here is your userId: ${ec.user.userId!"(No User Logged In)"}
