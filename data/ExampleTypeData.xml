@@ -35,7 +35,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <moqui.screen.form.DbFormFieldEntOptsOrder orderSequenceNum="1" entityFieldName="description"/>
             </moqui.screen.form.DbFormFieldEntOpts>
         </moqui.screen.form.DbFormField>
-        <moqui.screen.form.DbFormField fieldName="dbTestLabel" title="DB Test" fieldTypeEnumId="DBFFT_label" layoutSequenceNum="1">
+        <moqui.screen.form.DbFormField fieldName="dbTestLabel" title="DB Test" fieldTypeEnumId="DBFFT_display" layoutSequenceNum="1">
             <moqui.screen.form.DbFormFieldAttribute attributeName="text" value="This label is from a DbFormField"/>
         </moqui.screen.form.DbFormField>
     </moqui.screen.form.DbForm>
