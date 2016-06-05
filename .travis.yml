@@ -19,6 +19,7 @@ before_script:
   - cd moqui
   - git clone https://github.com/moqui/moqui-runtime.git runtime
   - cd runtime/component
+  - git clone https://github.com/moqui/moqui-camel.git
   - git clone https://github.com/moqui/example.git
   - cd ../..
   - chmod +x gradlew

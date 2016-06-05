@@ -124,8 +124,8 @@ along with this software (see the LICENSE.md file). If not, see
         <in-parameters><parameter name="testInput"/></in-parameters>
         <out-parameters><parameter name="testOutput"/></out-parameters>
         <actions>
-            <set field="testOutput" value="Here's the input: ${testInput}"/>
-            <log level="warn" message="targetCamelExample testOutput: ${result.testOutput}"/>
+            <set field="testOutput" value="Input was: ${testInput}"/>
+            <log level="info" message="targetCamelExample testOutput: '${testOutput}'"/>
         </actions>
     </service>
     
