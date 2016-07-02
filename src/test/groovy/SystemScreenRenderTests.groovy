@@ -74,10 +74,10 @@ class SystemScreenRenderTests extends Specification {
 
         // DataDocument screens
         // NOTE: nothing specific to test in DataDocument screens unless at least mantle is in place
-        // TODO: add example DataDocument and use here
-        "DataDocument/Search" | "" | ""
-        "DataDocument/Index" | "" | ""
-        "DataDocument/Export" | "" | ""
+        // TODO: add example DataDocument and use here; also needs dependency on moqui-elasticsearch for these
+        // "DataDocument/Search" | "" | ""
+        // "DataDocument/Index" | "" | ""
+        // "DataDocument/Export" | "" | ""
 
         // EntitySync screens
         "EntitySync/EntitySyncList" | "Example sync" | ""
