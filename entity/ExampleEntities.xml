@@ -19,18 +19,18 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- ========================================================= -->
 
     <!-- Example -->
-    <extend-entity entity-name="Example" package-name="moqui.example">
+    <extend-entity entity-name="Example" package="moqui.example">
         <field name="auditedField" type="text-medium" enable-audit-log="true"/>
         <field name="encryptedField" type="text-medium" encrypt="true"/>
         <field name="exampleEmail" type="text-medium"/>
         <field name="exampleUrl" type="text-medium"/>
         <!-- test replace relationship -->
-        <relationship type="one" title="ExampleType" related-entity-name="moqui.basic.Enumeration" short-alias="type">
+        <relationship type="one" title="ExampleType" related="moqui.basic.Enumeration" short-alias="type">
             <key-map field-name="exampleTypeEnumId"/></relationship>
         <!-- test additional relationship -->
-        <relationship type="one" title="Example" related-entity-name="moqui.basic.StatusItem" short-alias="status"/>
+        <relationship type="one" title="Example" related="moqui.basic.StatusItem" short-alias="status"/>
     </extend-entity>
-    <entity entity-name="Example" package-name="moqui.example" short-alias="examples" allow-user-field="true">
+    <entity entity-name="Example" package="moqui.example" short-alias="examples" allow-user-field="true">
         <field name="exampleId" type="id" is-pk="true"><description>primary sequenced ID</description></field>
         <field name="exampleTypeEnumId" type="id"/>
         <field name="statusId" type="id" enable-audit-log="true"/>
@@ -46,16 +46,16 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="anotherDate" type="date-time"/>
         <field name="anotherText" type="text-medium"/>
         -->
-        <relationship type="one" title="ExampleType" related-entity-name="moqui.basic.Enumeration" short-alias="type">
+        <relationship type="one" title="ExampleType" related="moqui.basic.Enumeration" short-alias="type">
             <key-map field-name="exampleTypeEnumId"/></relationship>
 
         <!-- This is not generally necessary, reverse relationships are created automatically, but needed to specify
             the short-alias for use in entity REST requests and quick path look ups -->
-        <relationship type="many" related-entity-name="moqui.example.ExampleItem" short-alias="items" mutable="true">
+        <relationship type="many" related="moqui.example.ExampleItem" short-alias="items" mutable="true">
             <key-map field-name="exampleId"/></relationship>
-        <relationship type="many" related-entity-name="moqui.example.ExampleContent" short-alias="contents" mutable="true">
+        <relationship type="many" related="moqui.example.ExampleContent" short-alias="contents" mutable="true">
             <key-map field-name="exampleId"/></relationship>
-        <relationship type="many" related-entity-name="moqui.example.ExampleFeatureAppl" short-alias="featureAppls" mutable="true">
+        <relationship type="many" related="moqui.example.ExampleFeatureAppl" short-alias="featureAppls" mutable="true">
             <key-map field-name="exampleId"/></relationship>
 
         <seed-data>
@@ -95,24 +95,24 @@ along with this software (see the LICENSE.md file). If not, see
             <detail relationship="featureAppls"/>
         </master>
     </entity>
-    <entity entity-name="ExampleItem" package-name="moqui.example" short-alias="exampleItems">
+    <entity entity-name="ExampleItem" package="moqui.example" short-alias="exampleItems">
         <field name="exampleId" type="id" is-pk="true"/>
         <field name="exampleItemSeqId" type="id" is-pk="true"><description>secondary sequenced ID</description></field>
         <field name="description" type="text-medium"/>
         <field name="amount" type="number-float"/>
         <field name="amountUomId" type="id"/>
-        <relationship type="one" title="Amount" related-entity-name="moqui.basic.Uom">
+        <relationship type="one" title="Amount" related="moqui.basic.Uom">
             <key-map field-name="amountUomId"/></relationship>
-        <relationship type="one" related-entity-name="moqui.example.Example"/>
+        <relationship type="one" related="moqui.example.Example"/>
     </entity>
-    <entity entity-name="ExampleContent" package-name="moqui.example">
+    <entity entity-name="ExampleContent" package="moqui.example">
         <field name="exampleId" type="id" is-pk="true"/>
         <field name="contentLocation" type="text-medium" is-pk="true"/>
         <field name="purposeEnumId" type="id"/>
         <field name="locale" type="text-short"/>
-        <relationship type="one" title="ExampleContentPurpose" related-entity-name="moqui.basic.Enumeration">
+        <relationship type="one" title="ExampleContentPurpose" related="moqui.basic.Enumeration">
             <key-map field-name="purposeEnumId"/></relationship>
-        <relationship type="one" related-entity-name="moqui.example.Example"/>
+        <relationship type="one" related="moqui.example.Example"/>
         <seed-data>
             <moqui.basic.EnumerationType description="Example Content Purpose" enumTypeId="ExampleContentPurpose"/>
             <moqui.basic.Enumeration description="Sketch" enumId="EXCNTPRP_SKETCH" enumTypeId="ExampleContentPurpose"/>
@@ -123,11 +123,11 @@ along with this software (see the LICENSE.md file). If not, see
     </entity>
 
     <!-- Example Feature -->
-    <entity entity-name="ExampleFeature" package-name="moqui.example" short-alias="exampleFeatures">
+    <entity entity-name="ExampleFeature" package="moqui.example" short-alias="exampleFeatures">
         <field name="exampleFeatureId" type="id" is-pk="true"><description>primary sequenced ID</description></field>
         <field name="featureSourceEnumId" type="id"/>
         <field name="description" type="text-medium"/>
-        <relationship type="one" title="ExampleFeatureSource" related-entity-name="moqui.basic.Enumeration">
+        <relationship type="one" title="ExampleFeatureSource" related="moqui.basic.Enumeration">
             <key-map field-name="featureSourceEnumId"/></relationship>
         <seed-data>
             <!-- Example Feature Source -->
@@ -137,16 +137,16 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.Enumeration description="Employee" enumId="EXFTSRC_EMPLOYEE" sequenceNum="3" enumTypeId="ExampleFeatureSource"/>
         </seed-data>
     </entity>
-    <entity entity-name="ExampleFeatureAppl" package-name="moqui.example">
+    <entity entity-name="ExampleFeatureAppl" package="moqui.example">
         <field name="exampleId" type="id" is-pk="true"/>
         <field name="exampleFeatureId" type="id" is-pk="true"/>
         <field name="fromDate" type="date-time" is-pk="true"/>
         <field name="thruDate" type="date-time"/>
         <field name="exampleFeatureApplEnumId" type="id"/>
         <field name="sequenceNum" type="number-integer"/>
-        <relationship type="one" related-entity-name="moqui.example.Example" short-alias="moqui.example" mutable="true"/>
-        <relationship type="one" related-entity-name="moqui.example.ExampleFeature" short-alias="feature" mutable="true"/>
-        <relationship type="one" title="ExampleFeatureAppl" related-entity-name="moqui.basic.Enumeration">
+        <relationship type="one" related="moqui.example.Example" short-alias="moqui.example" mutable="true"/>
+        <relationship type="one" related="moqui.example.ExampleFeature" short-alias="feature" mutable="true"/>
+        <relationship type="one" title="ExampleFeatureAppl" related="moqui.basic.Enumeration">
             <key-map field-name="exampleFeatureApplEnumId"/></relationship>
 
         <seed-data>
