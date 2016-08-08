@@ -46,7 +46,8 @@ along with this software (see the LICENSE.md file). If not, see
             artifactGroupId="EXAMPLE_LTD" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
 
     <!-- ========== Tenant Example ========== -->
-    <!-- To load data into this tenant use something like: "gradle load -PtenantId=EXAMPLE1" -->
+    <!-- To load data into this tenant use something like: "gradle load -PtenantId=EXAMPLE1 -Ptypes=seed,seed-initial,install" -->
+    <!-- Commented because causes issues with mantle-usl tenant provision through subscription order test, reason still unknown:
     <moqui.tenant.Tenant tenantId="EXAMPLE1" tenantName="Example One" isEnabled="Y"
             defaultCurrencyUomId="USD" defaultLocale="en" defaultTimeZone="" defaultCountryGeoId="USA"/>
 
@@ -58,6 +59,7 @@ along with this software (see the LICENSE.md file). If not, see
             propName="user" propValue="sa"/>
     <moqui.tenant.TenantDataSourceXaProp tenantId="EXAMPLE1" entityGroupName="transactional"
             propName="password" propValue="sa"/>
+    -->
 
     <!-- ========== EntitySync Example ========== -->
     <moqui.entity.sync.EntitySync entitySyncId="EXAMPLE" description="Example sync to EXAMPLE1 tenant"
