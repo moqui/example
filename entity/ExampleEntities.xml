@@ -30,7 +30,7 @@ along with this software (see the LICENSE.md file). If not, see
         <!-- test additional relationship -->
         <relationship type="one" title="Example" related="moqui.basic.StatusItem" short-alias="status"/>
     </extend-entity>
-    <entity entity-name="Example" package="moqui.example" short-alias="examples" allow-user-field="true">
+    <entity entity-name="Example" package="moqui.example" short-alias="examples">
         <field name="exampleId" type="id" is-pk="true"><description>primary sequenced ID</description></field>
         <field name="exampleTypeEnumId" type="id"/>
         <field name="statusId" type="id" enable-audit-log="true"/>
