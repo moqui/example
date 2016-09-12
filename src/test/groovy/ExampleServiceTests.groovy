@@ -38,7 +38,7 @@ class ExampleServiceTests extends Specification {
     }
 
     def setup() {
-        ec.user.loginUser("john.doe", "moqui", null)
+        ec.user.loginUser("john.doe", "moqui")
         // we still have to disableAuthz even though a user is logged in because this user does not have permission to
         //     call this service directly (normally is called through a screen with inherited permission)
         ec.artifactExecution.disableAuthz()

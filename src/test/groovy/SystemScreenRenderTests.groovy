@@ -32,7 +32,7 @@ class SystemScreenRenderTests extends Specification {
 
     def setupSpec() {
         ec = Moqui.getExecutionContext()
-        ec.user.loginUser("john.doe", "moqui", null)
+        ec.user.loginUser("john.doe", "moqui")
         screenTest = ec.screen.makeTest().baseScreenPath("apps/system")
     }
 
@@ -81,7 +81,7 @@ class SystemScreenRenderTests extends Specification {
 
         // EntitySync screens
         "EntitySync/EntitySyncList" | "Example sync" | ""
-        "EntitySync/EntitySyncDetail?entitySyncId=EXAMPLE" | "EXAMPLE1" | "moqui.example.ExampleItem"
+        "EntitySync/EntitySyncDetail?entitySyncId=EXAMPLE" | "john.doe" | "moqui.example.ExampleItem"
 
         // SystemMessage screens
         // send a message using Tools/Service/ServiceRun (note that this does not work as an external URL, gets caught by security stuff)

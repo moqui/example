@@ -13,7 +13,6 @@ Example Component with:
 - services
 - REST API
 - screens
-- tenant
 - system message produce and consume
 - compiled code
 - tests

@@ -24,5 +24,5 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.basic.LocalizedMessage original="Example Feature" locale="zh" localized="样例特征"/>
 
     <moqui.basic.LocalizedMessage original="Test expansion ${ec.user.locale} original" locale="en"
-            localized="Test expansion ${ec.tenantId} localized"/>
+            localized="Test expansion ${ec.factory.moquiVersion} localized"/>
 </entity-facade-xml>
