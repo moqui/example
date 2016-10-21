@@ -42,6 +42,9 @@ task cleanLib(type: Delete) { delete file(jar.archivePath) }
 clean.dependsOn cleanLib
 
 test {
+    dependsOn cleanTest
+    include '**/ExampleSuite.class'
+
     systemProperty 'moqui.runtime', moquiDir.absolutePath + '/runtime'
     systemProperty 'moqui.conf', 'conf/MoquiDevConf.xml'
     systemProperty 'moqui.init.static', 'true'
