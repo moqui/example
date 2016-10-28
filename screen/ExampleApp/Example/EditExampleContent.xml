@@ -27,7 +27,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <transition name="uploadExampleContent">
         <actions><script><![CDATA[
-            import org.moqui.context.ResourceReference
+            import org.moqui.resource.ResourceReference
             org.moqui.context.ExecutionContext ec = context.ec
 
             org.apache.commons.fileupload.FileItem contentFile = context.contentFile
