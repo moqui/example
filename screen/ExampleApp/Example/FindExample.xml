@@ -12,13 +12,25 @@ You should have received a copy of the CC0 Public Domain Dedication
 along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
-<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
         default-menu-include="false">
 
-    <transition name="newExample"><default-response url="../EditExample"/></transition>
     <transition name="findExample"><default-response url="."/></transition>
     <transition name="editExample"><default-response url="../EditExample"/></transition>
+    <transition name="createExample"><service-call name="moqui.example.ExampleServices.createExample"/>
+        <default-response url="../EditExample"/></transition>
+
+    <transition name="getExampleTypeEnumList">
+        <actions>
+            <log level="warn" message="In getExampleTypeEnumList transition statusId=${statusId}"/>
+            <entity-find entity-name="moqui.basic.Enumeration" list="exampleTypeEnumList">
+                <econdition field-name="enumTypeId" value="ExampleType"/>
+                <order-by field-name="description"/>
+            </entity-find>
+            <script>ec.web.sendJsonResponse(exampleTypeEnumList)</script>
+        </actions>
+        <default-response type="none"/>
+    </transition>
 
     <pre-actions>
         <set field="html_title" value="Find Example"/>
@@ -33,46 +45,64 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find entity-name="ExampleStatusItem" list="exampleStatusItemList"/>
     </actions>
     <widgets>
-        <container>
-            <container-dialog id="FindExampleDialog" button-text="Search Examples">
-                <!-- NOTE: these find fields could go into the field.header-field element, but this is intentionally left this way to show another style of find form, and because there are lots of them -->
-                <form-single name="FindExamples" transition="findExample">
-                    <field name="exampleId"><default-field><text-find/></default-field></field>
-                    <field name="exampleName"><default-field><text-find/></default-field></field>
-                    <field name="exampleTypeEnumId"><default-field title="Type">
-                        <auto-widget-entity entity-name="moqui.example.Example" field-type="edit"/>
-                    </default-field></field>
-                    <field name="statusId"><default-field title="Status">
-                        <drop-down allow-empty="true"><list-options list="exampleStatusItemList" text="${description}"/></drop-down>
-                    </default-field></field>
-                    <field name="description"><default-field><text-find/></default-field></field>
-                    <field name="exampleDate"><default-field><date-find/></default-field></field>
-                    <field name="searchButton"><default-field title="Find"><submit/></default-field></field>
+        <container-box><box-header><label text="Find Examples" type="h5"/></box-header><box-toolbar>
+            <container-dialog id="CreateExampleDialog" button-text="Create Example">
+                <form-single name="CreateExample" transition="createExample" focus-field="exampleName">
+                    <field name="statusId">
+                        <default-field title="Status" tooltip="The status of the example">
+                            <drop-down allow-empty="false">
+                                <list-options list="exampleStatusItemList" text="${description}"/>
+                            </drop-down>
+                        </default-field>
+                    </field>
+                    <field name="exampleTypeEnumId">
+                        <default-field title="Type" tooltip="Type of example">
+                            <drop-down allow-empty="false">
+                                <!-- This is obviously more efficient and easier done this way, but for purposes of an example this list is
+                                    retrieved after load through an AJAX call to the getExampleTypeEnumList transition defined above. -->
+                                <dynamic-options transition="getExampleTypeEnumList" value-field="enumId" label-field="description">
+                                    <!-- this type drop-down doesn't change based on the statusId drop-down, but included here as an example of dependence on another field -->
+                                    <depends-on field="statusId"/>
+                                </dynamic-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+                    <field name="exampleName"><default-field tooltip="The name of the example"><text-line/></default-field></field>
+                    <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
                 </form-single>
             </container-dialog>
-            <link url="newExample" text="New Example" link-type="hidden-form" icon="glyphicon glyphicon-plus"/>
-        </container>
-        <form-list name="ListExamples" list="exampleList">
-            <field name="exampleId">
-                <default-field>
-                    <!-- this link will pass an exampleId param, as defined on the EditExample screen as an incoming parameter -->
-                    <link url="editExample" text="${exampleId}"/>
-                </default-field>
-            </field>
-            <field name="exampleName">
-                <header-field title="Name" show-order-by="case-insensitive"/>
-                <default-field><display also-hidden="false"/></default-field>
-            </field>
-            <field name="exampleTypeEnumId">
-                <default-field title="Type"><display-entity entity-name="moqui.basic.Enumeration" also-hidden="false"/></default-field>
-            </field>
-            <field name="statusId">
-                <default-field title="Status"><display-entity entity-name="moqui.basic.StatusItem" also-hidden="false"/></default-field>
-            </field>
-            <field name="description">
-                <header-field show-order-by="case-insensitive"/>
-                <default-field><display also-hidden="false"/></default-field>
-            </field>
-        </form-list>
+        </box-toolbar><box-body>
+            <form-list name="ListExamples" list="exampleList" skip-form="true" header-dialog="true" select-columns="true" show-csv-button="true">
+                <field name="exampleId"><header-field><text-find hide-options="true"/></header-field>
+                    <default-field>
+                        <!-- this link will pass an exampleId param, as defined on the EditExample screen as an incoming parameter -->
+                        <link url="editExample" text="${exampleId}" link-type="anchor"/>
+                    </default-field>
+                </field>
+                <field name="exampleName">
+                    <header-field title="Name" show-order-by="case-insensitive"><text-find/></header-field>
+                    <default-field><link url="editExample" text="${exampleName}" link-type="anchor"/></default-field>
+                </field>
+                <field name="exampleTypeEnumId">
+                    <header-field title="Type"><auto-widget-entity entity-name="moqui.example.Example" field-type="edit"/></header-field>
+                    <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
+                </field>
+                <field name="statusId">
+                    <header-field title="Status"><drop-down allow-empty="true">
+                        <list-options list="exampleStatusItemList" text="${description}"/></drop-down></header-field>
+                    <default-field><display-entity entity-name="moqui.basic.StatusItem"/></default-field>
+                </field>
+                <field name="exampleDate">
+                    <header-field title="Date" show-order-by="true"><date-period/></header-field>
+                    <default-field><display/></default-field>
+                </field>
+                <field name="description">
+                    <header-field show-order-by="case-insensitive"><text-find/></header-field>
+                    <default-field><display/></default-field>
+                </field>
+                <field name="findButton"><header-field title=""><submit text="Find"/></header-field>
+                    <default-field><ignored/></default-field></field>
+            </form-list>
+        </box-body></container-box>
     </widgets>
 </screen>
