@@ -72,31 +72,33 @@ along with this software (see the LICENSE.md file). If not, see
                 </form-single>
             </container-dialog>
         </box-toolbar><box-body>
-            <form-list name="ListExamples" list="exampleList" skip-form="true" header-dialog="true" select-columns="true" show-csv-button="true">
-                <field name="exampleId"><header-field><text-find hide-options="true"/></header-field>
+            <form-list name="ListExamples" list="exampleList" skip-form="true" header-dialog="true" select-columns="true"
+                       show-csv-button="true" show-text-button="true" show-pdf-button="true">
+                <field name="exampleId" print-width="10" print-width-type="characters">
+                    <header-field><text-find hide-options="true"/></header-field>
                     <default-field>
                         <!-- this link will pass an exampleId param, as defined on the EditExample screen as an incoming parameter -->
                         <link url="editExample" text="${exampleId}" link-type="anchor"/>
                     </default-field>
                 </field>
-                <field name="exampleName">
+                <field name="exampleName" print-width="40">
                     <header-field title="Name" show-order-by="case-insensitive"><text-find/></header-field>
                     <default-field><link url="editExample" text="${exampleName}" link-type="anchor"/></default-field>
                 </field>
-                <field name="exampleTypeEnumId">
+                <field name="exampleTypeEnumId" print-width="30">
                     <header-field title="Type"><auto-widget-entity entity-name="moqui.example.Example" field-type="edit"/></header-field>
                     <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
                 </field>
-                <field name="statusId">
+                <field name="statusId" print-width="30">
                     <header-field title="Status"><drop-down allow-empty="true">
                         <list-options list="exampleStatusItemList" text="${description}"/></drop-down></header-field>
                     <default-field><display-entity entity-name="moqui.basic.StatusItem"/></default-field>
                 </field>
-                <field name="exampleDate">
+                <field name="exampleDate" print-width="16" print-width-type="characters">
                     <header-field title="Date" show-order-by="true"><date-period/></header-field>
                     <default-field><display/></default-field>
                 </field>
-                <field name="description">
+                <field name="description" print-width="0"><!-- print-width=0 hides the column in text/pdf output -->
                     <header-field show-order-by="case-insensitive"><text-find/></header-field>
                     <default-field><display/></default-field>
                 </field>
