@@ -85,7 +85,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <field-row><field-ref name="exampleSize"/><field-ref name="exampleDate"/></field-row>
                 <field-row><field-ref name="testDate"/><field-ref name="testTime"/></field-row>
 
-                <field-accordion collapsible="true" active="1">
+                <field-accordion active="1">
                     <field-group title="Special Fields">
                         <field-ref name="auditedField"/>
                         <field-ref name="encryptedField"/>
