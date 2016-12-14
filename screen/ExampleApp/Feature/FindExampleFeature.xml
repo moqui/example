@@ -32,11 +32,10 @@ along with this software (see the LICENSE.md file). If not, see
                 <!-- this list will pass an exampleFeatureId param, as defined on the EditExampleFeature screen as an incoming parameter -->
                 <default-field><link url="editExampleFeature" text="${exampleFeatureId}"/></default-field>
             </field>
-            <field name="description">
-                <header-field show-order-by="true"><text-find hide-options="true"/></header-field>
-                <default-field><display/></default-field>
-            </field>
-            <field name="searchButton"><header-field title="Find"><submit/></header-field></field>
+            <field name="description"><header-field show-order-by="true"><text-find hide-options="true"/></header-field>
+                <default-field><display/></default-field></field>
+            <field name="searchButton"><header-field title="Find"><submit/></header-field>
+                <default-field><display text=""/></default-field></field>
         </form-list>
     </widgets>
 </screen>
