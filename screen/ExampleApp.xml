@@ -132,16 +132,6 @@ along with this software (see the LICENSE.md file). If not, see
     </subscreens>
 
     <widgets>
-        <subscreens-panel id="example-app" type="popup" title="Example App"/>
-        <!-- for a header and panel in an app can use something like this, though the basic approach above is cleaner:
-        <container-panel id="example-app">
-            <panel-header>
-                <label text="Moqui Example App" type="h2"/>
-            </panel-header>
-            <panel-center>
-                <subscreens-panel id="example-app-subscreen" type="tab"/>
-            </panel-center>
-        </container-panel>
-        -->
+        <subscreens-panel id="example-app" type="popup"/>
     </widgets>
 </screen>
