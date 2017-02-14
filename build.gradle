@@ -35,7 +35,7 @@ check.dependsOn.remove(test)
 
 jar {
     destinationDir = file(projectDir.absolutePath + '/lib')
-    // this is required to change from the default that includes the path to this module (ie 'runtime/base-componet/example')
+    // this is required to change from the default that includes the path to this module (ie 'runtime/component/example')
     baseName = 'example'
 }
 task cleanLib(type: Delete) { delete file(jar.archivePath) }
