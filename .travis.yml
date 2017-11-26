@@ -23,7 +23,7 @@ env:
 script:
   - ./gradlew getGit -Pcomponent=example
   - ./gradlew load
-  - ./gradlew runtime/component/example:test --info
+  - ./gradlew runtime:component:example:test --info
 
 cache:
   directories:
