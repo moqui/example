@@ -46,7 +46,7 @@ along with this software (see the LICENSE.md file). If not, see
             ]]></script></actions>
         <default-response url="."/>
     </transition>
-    <transition name="downloadContent">
+    <transition name="downloadContent" read-only="true">
         <actions>
             <entity-find-one entity-name="ExampleContent" value-field="exampleContent"/>
             <script>ec.web.sendResourceResponse(exampleContent.contentLocation)</script>
