@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a 
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
+        default-menu-title="Dynamic Items" default-menu-index="9" render-modes="js,vuet" server-static="js,vuet">
+    
+    <parameter name="exampleId"/>
+
+    <transition name="getExampleItemList" read-only="true">
+        <parameter name="exampleId"/>
+        <actions>
+            <entity-find entity-name="moqui.example.ExampleItem" list="exampleItemList">
+                <econdition field-name="exampleId"/></entity-find>
+            <script>ec.web.sendJsonResponse(exampleItemList)</script>
+        </actions>
+        <default-response type="none"/>
+    </transition>
+    <transition name="getAmountUomList" read-only="true">
+        <parameter name="term"/>
+        <parameter name="pageIndex"/>
+        <actions>
+            <set field="pageIndex" from="pageIndex ?: 0"/>
+            <set field="pageSize" from="pageSize ?: 20"/>
+            <set field="term" from="term ?: ''"/>
+
+            <entity-find-one entity-name="moqui.basic.UomAndType" value-field="uomAndType">
+                <field-map field-name="uomId" from="term"/></entity-find-one>
+            <if condition="uomAndType != null"><then>
+                <set field="uomList" from="[uomAndType]"/>
+            </then><else>
+                <entity-find entity-name="moqui.basic.UomAndType" list="uomList">
+                    <!-- NOTE: search-form-inputs used for pagination (infinite scroll in drop-down) -->
+                    <search-form-inputs default-order-by="typeDescription,description"/>
+                    <econditions combine="or">
+                        <econdition field-name="description" operator="like" value="%${term}%" ignore-case="true"/>
+                        <econdition field-name="abbreviation" operator="like" value="%${term}%" ignore-case="true"/>
+                    </econditions>
+                    <econdition field-name="uomTypeEnumId" operator="not-equals" value="UT_CURRENCY_MEASURE"/>
+                </entity-find>
+            </else></if>
+            <script>
+                def outList = []
+                for (uom in uomList) outList.add([value:uom.uomId, label:"${uom.typeDescription} - ${ec.resource.expand('UomNameTemplate','',uom)}".toString()])
+                ec.web.sendJsonResponse([options:outList, pageSize:pageSize, count:(uomListCount?:uomList.size())])
+            </script>
+        </actions>
+        <default-response type="none"/>
+    </transition>
+
+    <widgets>
+        <render-mode>
+            <text type="js" location="component://example/screen/ExampleApp/Example/DynamicExampleItems/ExampleItems.js"/>
+            <text type="vuet" location="component://example/screen/ExampleApp/Example/DynamicExampleItems/ExampleItems.vuet"/>
+        </render-mode>
+    </widgets>
+</screen>
