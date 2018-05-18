@@ -58,11 +58,13 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.service.message.SystemMessageType systemMessageTypeId="ExampleMessage" description="Example Message"
             produceServiceName="moqui.example.ExampleServices.produce#ExampleMessage"
             consumeServiceName="moqui.example.ExampleServices.consume#ExampleMessage"
-            sendServiceName="org.moqui.impl.SystemMessageServices.send#SystemMessageJsonRpc"
+            sendServiceName="org.moqui.impl.SystemMessageServices.send#SystemMessageRest"
             receiveServiceName=""/>
     <moqui.service.message.SystemMessageRemote systemMessageRemoteId="Example1Local" description="Example Local"
-            sendUrl="http://localhost:8080/rpc/json"
-            username="john.doe" password="moqui"/>
+            sendUrl="http://localhost:8080/rest/sm/${systemMessageTypeId}/Example1Local/${remoteMessageId}"
+            messageAuthEnumId="SmatLogin" username="john.doe" password="moqui"/>
+    <!-- old approach: <moqui.service.message.SystemMessageRemote systemMessageRemoteId="Example1Local" description="Example Local"
+            sendUrl="http://localhost:8080/rpc/json" username="john.doe" password="moqui"/> -->
     <moqui.service.message.SystemMessageRemote systemMessageRemoteId="Example1Direct" description="Example Direct"
             sendServiceName="org.moqui.impl.SystemMessageServices.send#SystemMessageDirectLocal"/>
     

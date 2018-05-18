@@ -92,7 +92,7 @@ class SystemScreenRenderTests extends Specification {
                 "Test Example Name" | "EXST_IN_DESIGN"
         "SystemMessage/Remote/MessageRemoteList" | "Example Local" | "john.doe"
         "SystemMessage/Remote/MessageRemoteDetail?systemMessageRemoteId=Example1Local" |
-                "Example Local" | "http://localhost:8080/rpc/json"
+                "Example Local" | "http://localhost:8080/rest/sm"
         "SystemMessage/Type/MessageTypeList" | "Example Message" |
                 "moqui.example.ExampleServices.consume#ExampleMessage"
         "SystemMessage/Type/MessageTypeDetail?systemMessageTypeId=ExampleMessage" |
