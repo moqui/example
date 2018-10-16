@@ -152,6 +152,17 @@ along with this software (see the LICENSE.md file). If not, see
             <entity-find-one entity-name="moqui.service.message.SystemMessage" value-field="systemMessage"/>
             <set field="exampleMap" from="new groovy.json.JsonSlurper().parseText(systemMessage.messageText)"/>
             <service-call name="store#moqui.example.Example" in-map="exampleMap"/>
+            <!--
+            <script><![CDATA[
+            // cause a timeout
+            for (i = 0; i < 10; i++) {
+                ec.logger.warn("Running store#Example in consume")
+                ((org.moqui.context.ExecutionContext) ec).service.sync().name("store#moqui.example.Example").parameters(exampleMap).call()
+                if (ec.message.hasError()) return
+                Thread.sleep(10000)
+            }
+            ]]></script>
+            -->
         </actions>
     </service>
 </services>
