@@ -152,7 +152,7 @@ along with this software (see the LICENSE.md file). If not, see
             <entity-find-one entity-name="moqui.service.message.SystemMessage" value-field="systemMessage"/>
             <set field="exampleMap" from="new groovy.json.JsonSlurper().parseText(systemMessage.messageText)"/>
             <service-call name="store#moqui.example.Example" in-map="exampleMap"/>
-            <!--
+            <!-- run a long time to timeout:
             <script><![CDATA[
             // cause a timeout
             for (i = 0; i < 10; i++) {
@@ -163,6 +163,20 @@ along with this software (see the LICENSE.md file). If not, see
             }
             ]]></script>
             -->
+            <!-- <script>ec.transaction.setRollbackOnly("Test set rollback only", new Exception("Test rollback only location"))</script> -->
+            <!-- create with duplicate PK:
+            <entity-make-value entity-name="moqui.example.Example" value-field="bogusExample" map="[exampleId:'TEST1', exampleName:'bogus']"/>
+            <entity-create value-field="bogusExample"/>
+            -->
+            <!-- forced lock wait timeout:
+            <script>
+                ec.entity.find("moqui.example.Example").condition("exampleId", "TEST1").forUpdate(true).one()
+                ec.transaction.runRequireNew(5, "rollback message", {
+                    ec.entity.find("moqui.example.Example").condition("exampleId", "TEST1").forUpdate(true).one()
+                })
+            </script>
+            -->
+            <!-- <script>throw new Exception("Test exception")</script> -->
         </actions>
     </service>
 </services>
