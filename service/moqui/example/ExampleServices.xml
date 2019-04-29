@@ -133,6 +133,7 @@ along with this software (see the LICENSE.md file). If not, see
     <service verb="produce" noun="ExampleMessage">
         <in-parameters>
             <parameter name="exampleId" required="true"/>
+            <parameter name="systemMessageTypeId" default-value="ExampleMessage"/>
             <parameter name="systemMessageRemoteId" default-value="Example1Local"/>
             <parameter name="sendNow" type="Boolean" default="true"/>
         </in-parameters>
@@ -141,7 +142,7 @@ along with this software (see the LICENSE.md file). If not, see
             <entity-find-one entity-name="moqui.example.Example" value-field="example"/>
             <set field="exampleJson" from="groovy.json.JsonOutput.toJson(example)"/>
             <service-call name="org.moqui.impl.SystemMessageServices.queue#SystemMessage" out-map="context"
-                    in-map="[systemMessageTypeId:'ExampleMessage', systemMessageRemoteId:systemMessageRemoteId,
+                    in-map="[systemMessageTypeId:systemMessageTypeId, systemMessageRemoteId:systemMessageRemoteId,
                         messageText:exampleJson, sendNow:sendNow]"/>
         </actions>
     </service>
