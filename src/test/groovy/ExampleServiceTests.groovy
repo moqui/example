@@ -71,16 +71,6 @@ class ExampleServiceTests extends Specification {
         "Test String" == ExampleCompiled.echo("Test String")
     }
 
-    def "call localCamelExample service"() {
-        when:
-        String testInput = "Input"
-        Map result = ec.service.sync().name("moqui.example.ExampleServices.localCamelExample")
-                .parameters([testInput:testInput]).call()
-
-        then:
-        result.testOutput == "Input was: ${testInput}"
-    }
-
     def "send and consume ExampleMessage"() {
         when:
         // use the direct/local "remote" because no web server is running for local RPC call

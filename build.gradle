@@ -14,7 +14,7 @@
 
 apply plugin: 'groovy'
 
-version = '2.1.1'
+version = '2.1.3'
 sourceCompatibility = '1.8'
 def moquiDir = file(projectDir.absolutePath + '/../../..')
 def frameworkDir = file(moquiDir.absolutePath + '/framework')
@@ -39,9 +39,9 @@ dependencies {
 check.dependsOn.clear()
 
 jar {
-    destinationDir = file(projectDir.absolutePath + '/lib')
+    destinationDirectory = file(projectDir.absolutePath + '/lib')
     // this is required to change from the default that includes the path to this module (ie 'runtime/component/example')
-    baseName = 'example'
+    archiveBaseName = 'example'
 }
 task cleanLib(type: Delete) { delete file(jar.archivePath) }
 clean.dependsOn cleanLib
