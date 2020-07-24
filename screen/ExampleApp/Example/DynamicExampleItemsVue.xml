@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
-        default-menu-title="Dynamic Items Vue" default-menu-index="10" render-modes="vue" server-static="vue">
+        default-menu-title="Dynamic Items Vue" default-menu-index="10" render-modes="vue,qvue" server-static="vue,qvue">
     
     <parameter name="exampleId"/>
 
@@ -21,7 +21,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition-include name="getAmountUomList" location="component://example/screen/ExampleApp/Example/DynamicExampleItems.xml"/>
 
     <widgets>
-        <render-mode><text type="vue"><![CDATA[
+        <render-mode><text type="vue,qvue"><![CDATA[
 <template>
     <div>
         <p>NOTE: this is an example of a client rendered screen using Vue JS component from a .vue file</p>
