@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a 
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
+        default-menu-title="Dynamic Items Vue" default-menu-index="10" render-modes="vue" server-static="vue">
+    
+    <parameter name="exampleId"/>
+
+    <transition-include name="getExampleItemList" location="component://example/screen/ExampleApp/Example/DynamicExampleItems.xml"/>
+    <transition-include name="getAmountUomList" location="component://example/screen/ExampleApp/Example/DynamicExampleItems.xml"/>
+
+    <widgets>
+        <render-mode><text type="vue"><![CDATA[
+<template>
+    <div>
+        <p>NOTE: this is an example of a client rendered screen using Vue JS component from a .vue file</p>
+
+        <form @submit.prevent="addItem()">
+            <fieldset class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="addDescription">Description</label>
+                    <div class="col-sm-10"><input type="text" v-model="addDescription" name="addDescription" id="addDescription" size="40" class="form-control"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="addAmount">Amount</label>
+                    <div class="col-sm-10"><input type="text" v-model="addAmount" name="addAmount" id="addAmount" size="10" class="form-control"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="addAmountUomId">UOM</label>
+                    <div class="col-sm-10">
+                        <drop-down v-model="addAmountUomId" name="addAmountUomId" id="addAmountUomId" :server-search="true" :server-min-length="0"
+                              options-url="/apps/example/Example/DynamicExampleItems/getAmountUomList"></drop-down>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">&nbsp;</label>
+                    <div class="col-sm-10"><button type="submit" class="btn btn-primary btn-sm">Add Item</button></div>
+                </div>
+            </fieldset>
+        </form>
+        <p>Add item with description {{addDescription}}, amount {{addAmount}}, UOM {{addAmountUomId}} </p>
+
+        <table class="table table-striped table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>UOM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(exampleItem, exampleItemIndex) in exampleItemList">
+                    <td>{{exampleItem.exampleItemSeqId}}</td>
+                    <td>{{exampleItem.description}}</td>
+                    <td>{{exampleItem.amount}}</td>
+                    <td>{{exampleItem.amountUomId}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+<script>
+module.exports = {
+    data: function () { return {
+        exampleId: null,
+        exampleItemList: [],
+        addDescription: null, addAmount: null, addAmountUomId: null
+    } },
+    methods: {
+        addItem: function () {
+            // TODO: ajax call to add item
+            // TODO: ajax call to get fresh item list (for exampleItemSeqId and generally in case server changes any data we sent it, there is other data, etc)
+            // NOTE: best ajax call would be submit data and get new list in response, single ajax call instead of two
+            this.exampleItemList.push({ description:this.addDescription, amount:this.addAmount, amountUomId:this.addAmountUomId });
+        }
+    },
+    watch: {
+        addColumnDate:function () {console.log(this.addColumnDate);}
+    },
+    mounted: function () {
+        this.exampleId = this.$root.currentParameters.exampleId;
+        if (this.exampleId && this.exampleId.length) {
+            var vm = this;
+            $.ajax({ type:"GET", url:"/apps/example/Example/DynamicExampleItems/getExampleItemList",
+                     data:{ exampleId:this.exampleId }, dataType:"json", headers:{ Accept:'application/json' },
+                     error:moqui.handleAjaxError,
+                     success: function(responseObj, status, jqXHR) { vm.exampleItemList = responseObj; }});
+        }
+    }
+}
+</script>
+        ]]></text></render-mode>
+    </widgets>
+</screen>
