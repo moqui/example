@@ -74,7 +74,7 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="description"><default-field tooltip="The description of the example"><text-line/></default-field></field>
             <!-- uncomment to see example of a render-mode embedded in a field:
             <field name="testRenderMode"><default-field>
-                <render-mode><text type="html,vuet"><![CDATA[<span><div>This is test HTML text.</div><div>This is another line.</div></span>]]></text></render-mode>
+                <render-mode><text type="html,vuet,qvt"><![CDATA[<span><div>This is test HTML text.</div><div>This is another line.</div></span>]]></text></render-mode>
             </default-field></field>
             -->
             <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
