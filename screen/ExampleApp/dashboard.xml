@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
+        default-menu-include="true" menu-image="fa fa-dashboard" menu-image-type="icon" >
+
+    <widgets>
+        <container type="div">
+            <link url="/site" text="Example Site" url-type="plain"/>
+        </container>
+        <container-row><row-col lg="6" md="6">
+
+            <container-box>
+                <box-header title="Example App Sections"/>
+                <box-body>
+                    <link url="../Example" text="Example"/>
+                    <link url="../Survey" text="Survey"/>
+                    <link url="../Feature" text="Feature"/>
+                </box-body>
+            </container-box>
+        </row-col></container-row>
+
+        <!-- <link url="reloadEcfi" text="Reload Framework" link-type="anchor" confirmation="Are you sure? This is for development and emergency use only."/> -->
+    </widgets>
+</screen>
