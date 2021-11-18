@@ -32,11 +32,11 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response type="none"/>
     </transition>
 
-<!--    <pre-actions>-->
-<!--        <set field="html_title" value="Find Example"/>-->
-<!--        <set field="html_description" value="A page for finding Examples"/>-->
-<!--        <set field="html_keywords" value="moqui,find,example,status,edit,new"/>-->
-<!--    </pre-actions>-->
+    <pre-actions>
+        <set field="html_title" value="Find Example"/>
+        <set field="html_description" value="A page for finding Examples"/>
+        <set field="html_keywords" value="moqui,find,example,status,edit,new"/>
+    </pre-actions>
 
     <actions>
         <entity-find entity-name="moqui.example.Example" list="exampleList">

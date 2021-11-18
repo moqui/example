@@ -19,9 +19,7 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- this is a test, and example, of overriding the default FTL macro template to use for this screen -->
     <macro-template type="vuet" location="component://example/template/screen-macro/ExampleScreenMacros.vuet.ftl"/>
 
-    <subscreens default-item="FindExample">
-<!--        <subscreens-item location="../FindExample" menu-index="1" name="FindExample"/>-->
-    </subscreens>
+    <subscreens default-item="FindExample"/>
 
     <widgets>
         <subscreens-panel id="example-panel" type="popup"/>
