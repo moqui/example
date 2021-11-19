@@ -13,14 +13,13 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
-        default-menu-include="true" menu-image="fa fa-dashboard" menu-image-type="icon" >
+        menu-image="fa fa-dashboard" menu-image-type="icon" >
 
     <widgets>
-        <container type="div">
+        <container-row><row-col>
             <link url="/site" text="Example Site" url-type="plain"/>
-        </container>
+        </row-col></container-row>
         <container-row><row-col lg="6" md="6">
-
             <container-box>
                 <box-header title="Example App Sections"/>
                 <box-body>
