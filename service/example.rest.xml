@@ -17,7 +17,7 @@ along with this software (see the LICENSE.md file). If not, see
 
 <resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/rest-api-2.1.xsd"
         name="example" displayName="Example REST API" version="2.0.0">
-    <resource name="examples">
+    <resource name="examples" require-authentication="anonymous-view">
         <method type="get"><entity name="examples" operation="list"/></method>
         <method type="post"><service name="moqui.example.ExampleServices.create#Example"/></method>
 
