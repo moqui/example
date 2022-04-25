@@ -14,7 +14,7 @@
 
 apply plugin: 'groovy'
 
-version = '2.1.3'
+version = '3.0.0-rc9'
 // sourceCompatibility = '1.8'
 def moquiDir = file(projectDir.absolutePath + '/../../..')
 def frameworkDir = file(moquiDir.absolutePath + '/framework')
@@ -46,6 +46,11 @@ task cleanLib(type: Delete) { delete file(jar.archivePath) }
 clean.dependsOn cleanLib
 
 test {
+    useJUnitPlatform()
+    testLogging { events "passed", "skipped", "failed" }
+    testLogging.showStandardStreams = true; testLogging.showExceptions = true
+    maxParallelForks 1
+
     dependsOn cleanTest
     include '**/ExampleSuite.class'
 
@@ -53,8 +58,6 @@ test {
     systemProperty 'moqui.conf', 'conf/MoquiDevConf.xml'
     systemProperty 'moqui.init.static', 'true'
     maxHeapSize = "512M"
-
-    testLogging.showStandardStreams = true
 
     classpath += files(sourceSets.main.output.classesDirs)
     // filter out classpath entries that don't exist (gradle adds a bunch of these), or ElasticSearch JarHell will blow up
