@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-This software is in the public domain under CC0 1.0 Universal plus a 
+This software is in the public domain under CC0 1.0 Universal plus a
 Grant of Patent License.
 
 To the extent possible under law, the author(s) have dedicated all
@@ -123,7 +123,7 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response type="none"/>
     </transition>
 
-    <subscreens default-item="Example">
+    <subscreens default-item="dashboard">
         <!-- these are actually links to content to add to the menu since content is not automatically added to the menu -->
         <subscreens-item name="ExamplePolicies" menu-index="4" menu-title="Policies"/>
         <subscreens-item name="ExampleTerms" menu-index="5" menu-title="Terms"/>

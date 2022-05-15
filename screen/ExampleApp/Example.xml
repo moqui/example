@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-This software is in the public domain under CC0 1.0 Universal plus a 
+This software is in the public domain under CC0 1.0 Universal plus a
 Grant of Patent License.
 
 To the extent possible under law, the author(s) have dedicated all
@@ -22,6 +22,6 @@ along with this software (see the LICENSE.md file). If not, see
     <subscreens default-item="FindExample"/>
 
     <widgets>
-        <subscreens-panel id="example-panel" type="tab"/>
+        <subscreens-panel id="example-panel" type="popup"/>
     </widgets>
 </screen>
