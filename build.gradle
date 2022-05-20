@@ -14,7 +14,7 @@
 
 apply plugin: 'groovy'
 
-version = '3.0.0-rc9'
+version = '3.0.0'
 // sourceCompatibility = '1.8'
 def moquiDir = file(projectDir.absolutePath + '/../../..')
 def frameworkDir = file(moquiDir.absolutePath + '/framework')
