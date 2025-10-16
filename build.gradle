@@ -42,14 +42,14 @@ jar {
     // this is required to change from the default that includes the path to this module (ie 'runtime/component/example')
     archiveBaseName = 'example'
 }
-task cleanLib(type: Delete) { delete file(jar.archivePath) }
+task cleanLib(type: Delete) { delete jar.archiveFile.get().asFile }
 clean.dependsOn cleanLib
 
 test {
     useJUnitPlatform()
     testLogging { events "passed", "skipped", "failed" }
     testLogging.showStandardStreams = true; testLogging.showExceptions = true
-    maxParallelForks 1
+    maxParallelForks = 1
 
     dependsOn cleanTest
     include '**/ExampleSuite.class'
