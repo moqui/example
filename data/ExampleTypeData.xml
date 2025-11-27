@@ -14,15 +14,14 @@ along with this software (see the LICENSE.md file). If not, see
 -->
 <entity-facade-xml type="seed">
     <!-- In the seed data since code may rely on it: and example moqui.entity.view.DbViewEntity -->
-    <moqui.entity.view.DbViewEntity dbViewEntityName="StatusItemAndTypeDb" packageName="moqui.basic" cache="Y">
-        <moqui.entity.view.DbViewEntityMember entityAlias="SI" entityName="moqui.basic.StatusItem"/>
-        <moqui.entity.view.DbViewEntityMember entityAlias="ST" entityName="moqui.basic.StatusType" joinFromAlias="SI"/>
-        <moqui.entity.view.DbViewEntityKeyMap joinFromAlias="SI" entityAlias="ST" fieldName="statusTypeId"/>
-        <moqui.entity.view.DbViewEntityAlias entityAlias="SI" fieldAlias="statusId"/>
-        <moqui.entity.view.DbViewEntityAlias entityAlias="SI" fieldAlias="description"/>
-        <moqui.entity.view.DbViewEntityAlias entityAlias="SI" fieldAlias="sequenceNum"/>
-        <moqui.entity.view.DbViewEntityAlias entityAlias="ST" fieldAlias="typeDescription" fieldName="description"/>
-    </moqui.entity.view.DbViewEntity>
+    <moqui.entity.view.DbViewEntity dbViewEntityName="StatusItemAndTypeDb" packageName="moqui.basic" cache="Y" />
+    <moqui.entity.view.DbViewEntityMember dbViewEntityName="StatusItemAndTypeDb" entityAlias="SI" entityName="moqui.basic.StatusItem"/>
+    <moqui.entity.view.DbViewEntityMember dbViewEntityName="StatusItemAndTypeDb" entityAlias="ST" entityName="moqui.basic.StatusType" joinFromAlias="SI"/>
+    <moqui.entity.view.DbViewEntityKeyMap dbViewEntityName="StatusItemAndTypeDb" joinFromAlias="SI" entityAlias="ST" fieldName="statusTypeId"/>
+    <moqui.entity.view.DbViewEntityAlias dbViewEntityName="StatusItemAndTypeDb" entityAlias="SI" fieldAlias="statusId"/>
+    <moqui.entity.view.DbViewEntityAlias dbViewEntityName="StatusItemAndTypeDb" entityAlias="SI" fieldAlias="description"/>
+    <moqui.entity.view.DbViewEntityAlias dbViewEntityName="StatusItemAndTypeDb" entityAlias="SI" fieldAlias="sequenceNum"/>
+    <moqui.entity.view.DbViewEntityAlias dbViewEntityName="StatusItemAndTypeDb" entityAlias="ST" fieldAlias="typeDescription" fieldName="description"/>
 
     <!-- This is an example of a field override and a field addition using DbForm -->
     <moqui.screen.form.DbForm formId="ExampleAdmin" isListForm="N"
