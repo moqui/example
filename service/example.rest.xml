@@ -77,4 +77,12 @@ along with this software (see the LICENSE.md file). If not, see
             </resource>
         </id>
     </resource>
+    <resource name="test" require-authentication="anonymous-view">
+        <resource name="scheduleService">
+            <method type="post"><service name="moqui.example.ExampleServices.test#ScheduleService"/></method>
+        </resource>
+        <resource name="scheduleRealJob">
+            <method type="post"><service name="moqui.example.ExampleServices.test#ScheduleRealJob"/></method>
+        </resource>
+    </resource>
 </resource>
