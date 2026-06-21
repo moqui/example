@@ -215,4 +215,24 @@ along with this software (see the LICENSE.md file). If not, see
             <log level="info" message="HZ Test Echo Service task=${taskName} runtime=${ec.factory.runtimePath} thread=${Thread.currentThread().name}"/>
         </actions>
     </service>
+
+    <service verb="test" noun="ScheduleRealJob" authenticate="false" allow-remote="true">
+        <in-parameters>
+            <parameter name="taskName" default-value="hz-autoapprove-test"/>
+        </in-parameters>
+        <actions>
+            <service-schedule name="moqui.example.ExampleServices.test#RunAutoApproveDistributed"
+                task-name="${taskName}" distribute="true" initial-delay="2000" in-map="[taskName:taskName]"/>
+        </actions>
+    </service>
+    <service verb="test" noun="RunAutoApproveDistributed" authenticate="false">
+        <in-parameters>
+            <parameter name="taskName"/>
+        </in-parameters>
+        <actions>
+            <log level="info" message="[HZ-DIST-JOB] autoApprove#OrdersDelayed task=${taskName} runtime=${ec.factory.runtimePath} thread=${Thread.currentThread().name}"/>
+            <service-call name="mantle.order.OrderServices.autoApprove#OrdersDelayed" ignore-error="true"/>
+            <log level="info" message="[HZ-DIST-JOB] autoApprove#OrdersDelayed completed on runtime=${ec.factory.runtimePath}"/>
+        </actions>
+    </service>
 </services>
